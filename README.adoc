@@ -2,3 +2,11 @@
 
 The gem is available as open source under the terms of the
 http://opensource.org/licenses/MIT[MIT License].
+
+The gem includes "Iliad", a classical masterpiece by Homer, translated to
+English by Samuel Butler.  A work is in
+https://wiki.creativecommons.org/wiki/Public_domain[public domain] in USA and
+in almost whole world (if not whole world) as the translator has died over
+100 years ago (not to mention the original author).  It has been downloaded from
+Project Gutenberg, more details about the work can be found
+http://www.gutenberg.org/ebooks/2199[there].
