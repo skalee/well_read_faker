@@ -1,0 +1,4 @@
+== License
+
+The gem is available as open source under the terms of the
+http://opensource.org/licenses/MIT[MIT License].
