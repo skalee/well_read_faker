@@ -48,4 +48,26 @@ describe WellReadFaker::Source do
     threads.each &:join
   end
 
+  context "when initialized with option" do
+    let(:source){ described_class.new path, options }
+    let(:options){ {} }
+
+    describe ":begin" do
+      it "drops all the paragraphs before matching the expression" do
+        options.merge! begin: /Third/
+        expect(source.text.size).to eq(1)
+        expect(source.text[0]).to match(/Third/)
+      end
+
+      it "raises exception when no matching line was found" do
+        options.merge! begin: /Not included/
+        expect{ source.text }.to raise_exception(ArgumentError)
+      end
+
+      it "loads whole text when option is nil" do
+        expect(source.text[0]).to match(/First/)
+      end
+    end
+  end
+
 end

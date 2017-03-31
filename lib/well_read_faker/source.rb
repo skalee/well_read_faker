@@ -30,6 +30,12 @@ module WellReadFaker
     def process_raw_text raw
       paragraphs = raw.strip.split(/\n\s*\n/)
       paragraphs.map!{ |m| m.gsub /\s*\n\s*/, " " }
+      while (options.key? :begin) && (paragraphs[0] !~ options[:begin])
+        paragraphs.shift or raise(
+          ArgumentError,
+          "Regular expression #{options[:begin].inspect} not found in text."
+        )
+      end
       paragraphs
     end
 
