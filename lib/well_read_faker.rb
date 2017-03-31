@@ -21,6 +21,10 @@ module WellReadFaker
     @default_source_ident = ident
   end
 
+  def paragraph
+    default_source.paragraph
+  end
+
 end
 
 iliad_path = File.expand_path "../books/homer_butler_iliad.txt", __FILE__

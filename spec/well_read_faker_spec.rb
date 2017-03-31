@@ -1,5 +1,14 @@
 require "spec_helper"
 
+shared_context "stub default source" do
+  let(:default_source_dbl){ instance_double("WellReadFaker::Source") }
+  before do
+    allow(WellReadFaker).
+      to receive(:default_source).
+      and_return(default_source_dbl)
+  end
+end
+
 describe WellReadFaker do
   it "has a version number" do
     expect(WellReadFaker::VERSION).not_to be nil
@@ -40,6 +49,16 @@ describe WellReadFaker do
       expect{
         WellReadFaker.default_source = :dbl
       }.to change{ WellReadFaker.default_source }.to(source_dbl)
+    end
+  end
+
+  describe "#paragraph" do
+    include_context "stub default source"
+
+    it "is delegated to default source" do
+      str = "Paragraph string."
+      expect(default_source_dbl).to receive(:paragraph).and_return(str)
+      expect(WellReadFaker.paragraph).to be(str)
     end
   end
 end
