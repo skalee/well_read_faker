@@ -36,6 +36,12 @@ module WellReadFaker
           "Regular expression #{options[:begin].inspect} not found in text."
         )
       end
+      while (options.key? :end) && (paragraphs.pop !~ options[:end])
+        paragraphs.empty? and raise(
+          ArgumentError,
+          "Regular expression #{options[:end].inspect} not found in text."
+        )
+      end
       paragraphs
     end
 

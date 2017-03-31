@@ -68,6 +68,24 @@ describe WellReadFaker::Source do
         expect(source.text[0]).to match(/First/)
       end
     end
+
+    describe ":end" do
+      it "drops the paragraph which matches the expression and all the subsequent ones" do
+        options.merge! end: /Third/
+        expect(source.text.size).to eq(1)
+        expect(source.text[-1]).not_to match(/Third/)
+      end
+
+      it "raises exception when no matching line was found" do
+        options.merge! end: /Not included/
+        expect{ source.text }.to raise_exception(ArgumentError)
+      end
+
+      it "loads whole text when option is nil" do
+        expect(source.text[0]).to match(/First/)
+        expect(source.text[-1]).to match(/Third/)
+      end
+    end
   end
 
 end
