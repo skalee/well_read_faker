@@ -28,4 +28,18 @@ describe WellReadFaker do
       expect(WellReadFaker.sources[:short].text.join).to match /First line/
     end
   end
+
+  describe "default source" do
+    it "is Iliad by default" do
+      expect(WellReadFaker.default_source).to be(WellReadFaker.sources[:iliad])
+    end
+
+    it "can be set to some other source" do
+      source_dbl = instance_double("WellReadFaker::Source")
+      WellReadFaker.sources[:dbl] = source_dbl
+      expect{
+        WellReadFaker.default_source = :dbl
+      }.to change{ WellReadFaker.default_source }.to(source_dbl)
+    end
+  end
 end
