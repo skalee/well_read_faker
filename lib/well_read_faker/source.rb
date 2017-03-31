@@ -4,11 +4,12 @@ module WellReadFaker
   class Source
     include Mutex_m
 
-    attr_reader :path_to_book
+    attr_reader :path_to_book, :options
 
-    def initialize path_to_book
+    def initialize path_to_book, options = {}
       super()
       @path_to_book = path_to_book
+      @options = options
     end
 
     def text
