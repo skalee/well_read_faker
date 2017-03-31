@@ -11,6 +11,10 @@ module WellReadFaker
       @text ||= load
     end
 
+    def paragraph
+      text.sample
+    end
+
   private
 
     def load

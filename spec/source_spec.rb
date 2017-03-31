@@ -27,4 +27,12 @@ describe WellReadFaker::Source do
     end
   end
 
+  describe "#paragraph" do
+    subject{ source.paragraph }
+
+    it "returns one of the paragraphs" do
+      expect(source.text).to include subject
+    end
+  end
+
 end
