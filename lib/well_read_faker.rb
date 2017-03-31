@@ -9,8 +9,8 @@ module WellReadFaker
     @sources ||= {}
   end
 
-  def add_source ident, path
-    sources[ident] = Source.new(path)
+  def add_source ident, path, options = {}
+    sources[ident] = Source.new(path, options)
   end
 
   def default_source
