@@ -15,6 +15,26 @@ Test Coverage, link="https://coveralls.io/r/skalee/well_read_faker"]
 
 :toc:
 
+== Basic usage
+
+Call +WellReadFaker.paragraph+ to get a random paragraph.  For example,
+following piece of code:
+
+[source,ruby]
+--------------------------------------------------------------------------------
+puts WellReadFaker.paragraph
+--------------------------------------------------------------------------------
+
+Could print:
+
+--------------------------------------------------------------------------------
+Thus they prayed, but not as yet would Jove grant them their prayer.
+Then Priam, descendant of Dardanus, spoke, saying, "Hear me, Trojans
+and Achaeans, I will now go back to the wind-beaten city of Ilius: I
+dare not with my own eyes witness this fight between my son and
+Menelaus, for Jove and the other immortals alone know which shall fall."
+--------------------------------------------------------------------------------
+
 == License
 
 The gem is available as open source under the terms of the
