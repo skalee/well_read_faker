@@ -43,6 +43,11 @@ describe WellReadFaker do
       expect(WellReadFaker.default_source).to be(WellReadFaker.sources[:iliad])
     end
 
+    it "does include load Gutenberg Project clutter, e.g. license" do
+      book_content = WellReadFaker.default_source.text.join
+      expect(book_content).not_to match(/Project Gutenberg/i)
+    end
+
     it "can be set to some other source" do
       source_dbl = instance_double("WellReadFaker::Source")
       WellReadFaker.sources[:dbl] = source_dbl
