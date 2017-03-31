@@ -9,6 +9,12 @@ describe WellReadFaker do
     subject{ WellReadFaker.sources }
 
     it{ is_expected.to be_a(Hash) }
+
+    it "contains Iliad by default" do
+      expect(subject.keys).to include(:iliad)
+      expect(subject[:iliad]).to be_a(WellReadFaker::Source)
+      expect(subject[:iliad].text).not_to be_empty
+    end
   end
 
   describe "#add_source" do
