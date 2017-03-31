@@ -35,4 +35,17 @@ describe WellReadFaker::Source do
     end
   end
 
+  it "loads source text only once in a thread-safe way" do
+    expect(source).to receive(:load).once.and_wrap_original do |m|
+      sleep 0.2
+      m.call
+    end
+
+    threads = Array.new(2) do
+      Thread.new{ source.text }
+    end
+
+    threads.each &:join
+  end
+
 end

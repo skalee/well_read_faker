@@ -1,14 +1,18 @@
+require "mutex_m"
+
 module WellReadFaker
   class Source
+    include Mutex_m
 
     attr_reader :path_to_book
 
     def initialize path_to_book
+      super()
       @path_to_book = path_to_book
     end
 
     def text
-      @text ||= load
+      mu_synchronize{ @text ||= load }
     end
 
     def paragraph
