@@ -1,3 +1,20 @@
+Well Read Faker
+===============
+:homepage: https://github.com/skalee/well_read_faker
+
+image:https://img.shields.io/gem/v/well_read_faker.svg[
+Version, link="https://rubygems.org/gems/well_read_faker"]
+image:https://img.shields.io/travis/skalee/well_read_faker/master.svg[
+Build Status, link="https://travis-ci.org/skalee/well_read_faker/branches"]
+image:https://img.shields.io/gemnasium/skalee/well_read_faker.svg[
+Dependencies, link="https://gemnasium.com/skalee/well_read_faker"]
+image:https://img.shields.io/codeclimate/github/skalee/well_read_faker.svg[
+Code Climate, link="https://codeclimate.com/github/skalee/well_read_faker"]
+image:http://img.shields.io/coveralls/skalee/well_read_faker.svg[
+Test Coverage, link="https://coveralls.io/r/skalee/well_read_faker"]
+
+:toc:
+
 == License
 
 The gem is available as open source under the terms of the
