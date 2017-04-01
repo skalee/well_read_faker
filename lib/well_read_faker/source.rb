@@ -4,11 +4,11 @@ module WellReadFaker
   class Source
     include Mutex_m
 
-    attr_reader :path_to_book, :options
+    attr_reader :path_to_book_or_io, :options
 
-    def initialize path_to_book, options = {}
+    def initialize path_to_book_or_io, options = {}
       super()
-      @path_to_book = path_to_book
+      @path_to_book_or_io = path_to_book_or_io
       @options = options
     end
 
@@ -23,7 +23,12 @@ module WellReadFaker
   private
 
     def load
-      raw = File.read path_to_book
+      if path_to_book_or_io.respond_to? :read
+        raw = path_to_book_or_io.read
+      else
+        raw = File.read path_to_book_or_io
+      end
+
       @text = process_raw_text raw
     end
 

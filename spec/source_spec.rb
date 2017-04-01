@@ -5,6 +5,20 @@ describe WellReadFaker::Source do
   let(:source){ described_class.new path }
   let(:path){ "spec/short_text.txt"}
 
+  describe "#new" do
+    it "accepts String as an argument" do
+      source = described_class.new path
+      expect(source.text[0]).to start_with("First line")
+    end
+
+    it "accepts IO as an argument" do
+      text = File.read path
+      io = StringIO.new text
+      source = described_class.new io
+      expect(source.text[0]).to start_with("First line")
+    end
+  end
+
   describe "#text" do
     subject{ source.text }
     it{ is_expected.to be_an(Array) }
