@@ -33,6 +33,12 @@ dare not with my own eyes witness this fight between my son and
 Menelaus, for Jove and the other immortals alone know which shall fall."
 --------------------------------------------------------------------------------
 
+== Note about randomness quality
+
+There is no guarantee that subsequent calls always return unique values.
+Currently, results are drawn with +Array#sample+.  The Iliad consists of
+over 1000 paragraphs, and that should be enough for many applications.
+
 == License
 
 The gem is available as open source under the terms of the
