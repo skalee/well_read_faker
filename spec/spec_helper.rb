@@ -3,7 +3,7 @@ require "bundler/setup"
 begin
   require "coveralls"
   Coveralls.wear! if ENV["CI"] == true
-rescue
+rescue LoadError
 end
 
 require "well_read_faker"
