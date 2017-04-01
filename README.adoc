@@ -23,7 +23,7 @@ following piece of code:
 puts WellReadFaker.paragraph
 --------------------------------------------------------------------------------
 
-Could print:
+Could print (without newlines):
 
 --------------------------------------------------------------------------------
 Thus they prayed, but not as yet would Jove grant them their prayer.
