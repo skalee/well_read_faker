@@ -1,4 +1,11 @@
 require "bundler/setup"
+
+begin
+  require "coveralls"
+  Coveralls.wear! if ENV["CI"] == true
+rescue
+end
+
 require "well_read_faker"
 
 RSpec.configure do |config|
