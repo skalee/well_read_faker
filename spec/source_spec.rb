@@ -102,6 +102,20 @@ describe WellReadFaker::Source do
         expect(source.text[-1]).to match(/Third/)
       end
     end
+
+    describe ":min_words" do
+      it "rejects paragraphs which have less than given words" do
+        options.merge! min_words: 5
+        expect(source.text.size).to eq(1)
+        expect(source.text[0]).to match(/Third line/)
+      end
+
+      it "includes paragraphs which have at least given number of words" do
+        options.merge! min_words: 4
+        expect(source.text.size).to eq(2)
+        expect(source.text[0]).to match(/First line/)
+      end
+    end
   end
 
 end

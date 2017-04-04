@@ -36,6 +36,9 @@ module WellReadFaker
       trimmed = trim_text_by_regexps raw, options[:begin], options[:end]
       paragraphs = trimmed.split(/\n\s*\n/)
       paragraphs.map!{ |m| m.gsub /\s*\n\s*/, " " }
+      if options[:min_words]
+        paragraphs.select!{ |m| /(\w+\b\W*){#{options[:min_words]}}/ =~ m }
+      end
       paragraphs
     end
 
