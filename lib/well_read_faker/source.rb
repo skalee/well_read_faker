@@ -33,21 +33,33 @@ module WellReadFaker
     end
 
     def process_raw_text raw
-      paragraphs = raw.strip.split(/\n\s*\n/)
+      trimmed = trim_text_by_regexps raw, options[:begin], options[:end]
+      paragraphs = trimmed.split(/\n\s*\n/)
       paragraphs.map!{ |m| m.gsub /\s*\n\s*/, " " }
-      while (options.key? :begin) && (paragraphs[0] !~ options[:begin])
-        paragraphs.shift or raise(
-          ArgumentError,
-          "Regular expression #{options[:begin].inspect} not found in text."
-        )
-      end
-      while (options.key? :end) && (paragraphs.pop !~ options[:end])
-        paragraphs.empty? and raise(
-          ArgumentError,
-          "Regular expression #{options[:end].inspect} not found in text."
-        )
-      end
       paragraphs
+    end
+
+    def trim_text_by_regexps source_text, begin_rx, end_rx
+      retval = source_text.dup
+
+      if begin_rx
+        match_data = begin_rx.match(retval) or raise(
+          ArgumentError,
+          "Regular expression #{begin_rx.inspect} not found in text."
+        )
+        retval[0..match_data.begin(0)-1] = ""
+      end
+
+      if end_rx
+        match_data = end_rx.match(retval) or raise(
+          ArgumentError,
+          "Regular expression #{end_rx.inspect} not found in text."
+        )
+        retval[match_data.begin(0)..-1] = ""
+      end
+
+      retval.strip!
+      retval
     end
 
   end

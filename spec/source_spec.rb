@@ -67,7 +67,7 @@ describe WellReadFaker::Source do
     let(:options){ {} }
 
     describe ":begin" do
-      it "drops all the paragraphs before matching the expression" do
+      it "drops all the text before the first match of the given expression" do
         options.merge! begin: /Third/
         expect(source.text.size).to eq(1)
         expect(source.text[0]).to match(/Third/)
@@ -84,10 +84,12 @@ describe WellReadFaker::Source do
     end
 
     describe ":end" do
-      it "drops the paragraph which matches the expression and all the subsequent ones" do
-        options.merge! end: /Third/
-        expect(source.text.size).to eq(1)
-        expect(source.text[-1]).not_to match(/Third/)
+      it "drops all the text from the first match till document end, including match" do
+        options.merge! end: /is in a new paragraph/
+        expect(source.text.size).to eq(2)
+        expect(source.text[-1]).to match(/Third/)
+        expect(source.text[-1]).not_to match(/is in a new paragraph/)
+        expect(source.text[-1]).not_to match(/And consists of/)
       end
 
       it "raises exception when no matching line was found" do
