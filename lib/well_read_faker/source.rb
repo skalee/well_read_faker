@@ -13,7 +13,7 @@ module WellReadFaker
     end
 
     def text
-      mu_synchronize{ @text ||= load }
+      @text || mu_synchronize{ @text ||= load }
     end
 
     def paragraph
