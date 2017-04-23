@@ -13,11 +13,16 @@ module WellReadFaker
     end
 
     def text
-      @text || mu_synchronize{ @text ||= load }
+      ensure_loaded
+      @text
     end
 
     def paragraph
       text.sample
+    end
+
+    def ensure_loaded
+      @loaded or mu_synchronize{ @loaded or load }
     end
 
   private
@@ -30,6 +35,7 @@ module WellReadFaker
       end
 
       @text = process_raw_text raw
+      @loaded = true
     end
 
     def process_raw_text raw
