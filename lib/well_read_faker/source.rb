@@ -34,7 +34,7 @@ module WellReadFaker
         raw = File.read path_to_book_or_io
       end
 
-      @text = process_raw_text raw
+      process_raw_text raw
       @loaded = true
     end
 
@@ -45,7 +45,7 @@ module WellReadFaker
       if options[:min_words]
         paragraphs.select!{ |m| /(\w+\b\W*){#{options[:min_words]}}/ =~ m }
       end
-      paragraphs
+      @text = paragraphs
     end
 
     def trim_text_by_regexps source_text, begin_rx, end_rx
