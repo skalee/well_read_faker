@@ -56,6 +56,15 @@ describe WellReadFaker::Source do
       expect(take_many).to all be_a(String)
       expect(source.text).to include(*take_many)
     end
+
+    it "never duplicates paragraphs before running out of them, " \
+      "and after that returns the least recently used one" do
+      unique_count = take_many.uniq.size
+      0.upto(take_many_size) do |i|
+        slice = take_many[i, unique_count]
+        expect(slice.uniq).to eq(slice)
+      end
+    end
   end
 
   it "loads source text only once in a thread-safe way" do

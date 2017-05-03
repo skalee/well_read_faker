@@ -46,9 +46,7 @@ module WellReadFaker
       if options[:min_words]
         paragraphs.select!{ |m| /(\w+\b\W*){#{options[:min_words]}}/ =~ m }
       end
-      @paragraph_iter = Enumerator.new(Float::INFINITY) do |y|
-        loop{ y << paragraphs.sample }
-      end
+      @paragraph_iter = paragraphs.sort_by{ rand }.cycle
       @text = paragraphs
     end
 
