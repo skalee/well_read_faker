@@ -43,9 +43,18 @@ describe WellReadFaker::Source do
 
   describe "#paragraph" do
     subject{ source.paragraph }
+    let(:take_many){ Array.new(take_many_size){ source.paragraph } }
+    let(:take_many_size){ 1000 }
 
     it "returns one of the paragraphs" do
       expect(source.text).to include subject
+    end
+
+    it "returns paragraphs infinitely" do
+      expect{ take_many }.not_to raise_exception
+      expect(take_many.size).to eq(take_many_size)
+      expect(take_many).to all be_a(String)
+      expect(source.text).to include(*take_many)
     end
   end
 

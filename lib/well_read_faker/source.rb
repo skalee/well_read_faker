@@ -18,7 +18,8 @@ module WellReadFaker
     end
 
     def paragraph
-      text.sample
+      ensure_loaded
+      @paragraph_iter.next
     end
 
     def ensure_loaded
@@ -44,6 +45,9 @@ module WellReadFaker
       paragraphs.map!{ |m| m.gsub /\s*\n\s*/, " " }
       if options[:min_words]
         paragraphs.select!{ |m| /(\w+\b\W*){#{options[:min_words]}}/ =~ m }
+      end
+      @paragraph_iter = Enumerator.new(Float::INFINITY) do |y|
+        loop{ y << paragraphs.sample }
       end
       @text = paragraphs
     end
