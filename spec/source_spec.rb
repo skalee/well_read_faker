@@ -25,22 +25,6 @@ describe WellReadFaker::Source do
     it{ is_expected.not_to be_empty }
   end
 
-  describe "every element of #text" do
-    subject{ source.text }
-
-    it "includes some non-whitespace characters" do
-      is_expected.to all match /\S/
-    end
-
-    it "has no leading nor trailing whitespaces" do
-      is_expected.to all match(/\A\S/) & match(/\S\z/)
-    end
-
-    it "has no new line characters" do
-      is_expected.to all exclude "\n"
-    end
-  end
-
   describe "#paragraph" do
     subject{ source.paragraph }
     let(:take_many){ Array.new(take_many_size){ source.paragraph } }
@@ -63,6 +47,22 @@ describe WellReadFaker::Source do
       0.upto(take_many_size) do |i|
         slice = take_many[i, unique_count]
         expect(slice.uniq).to eq(slice)
+      end
+    end
+
+    describe "every possible return value" do
+      subject{ take_many.to_set }
+
+      it "includes some non-whitespace characters" do
+        is_expected.to all match /\S/
+      end
+
+      it "has no leading nor trailing whitespaces" do
+        is_expected.to all match(/\A\S/) & match(/\S\z/)
+      end
+
+      it "has no new line characters" do
+        is_expected.to all exclude "\n"
       end
     end
   end
