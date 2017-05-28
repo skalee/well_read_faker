@@ -19,12 +19,6 @@ describe WellReadFaker::Source do
     end
   end
 
-  describe "#text" do
-    subject{ source.text }
-    it{ is_expected.to be_an(Array) }
-    it{ is_expected.not_to be_empty }
-  end
-
   describe "#paragraph" do
     subject{ source.paragraph }
     let(:take_many){ Array.new(take_many_size){ source.paragraph } }
@@ -76,10 +70,6 @@ describe WellReadFaker::Source do
     retvals = []
 
     threads = Array.new(2) do
-      Thread.new{ source.text }
-    end
-
-    threads << Array.new(2) do
       Thread.new{ retvals << source.paragraph }
     end
 

@@ -12,11 +12,6 @@ module WellReadFaker
       @options = options
     end
 
-    def text
-      ensure_loaded
-      @text
-    end
-
     def paragraph
       ensure_loaded
       @paragraphs_arr[inc_paragraphs]
