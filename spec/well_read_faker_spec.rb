@@ -22,7 +22,7 @@ describe WellReadFaker do
     it "contains Iliad by default" do
       expect(subject.keys).to include(:iliad)
       expect(subject[:iliad]).to be_a(WellReadFaker::Source)
-      expect(subject[:iliad].text).not_to be_empty
+      expect(subject[:iliad].paragraph).to match(/w/)
     end
   end
 
