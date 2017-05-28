@@ -8,14 +8,14 @@ describe WellReadFaker::Source do
   describe "#new" do
     it "accepts String as an argument" do
       source = described_class.new path
-      expect(source.text[0]).to start_with("First line")
+      expect(all_paragraphs_in(source).join).to match(/First line/)
     end
 
     it "accepts IO as an argument" do
       text = File.read path
       io = StringIO.new text
       source = described_class.new io
-      expect(source.text[0]).to start_with("First line")
+      expect(all_paragraphs_in(source).join).to match(/First line/)
     end
   end
 
@@ -81,55 +81,56 @@ describe WellReadFaker::Source do
   context "when initialized with option" do
     let(:source){ described_class.new path, options }
     let(:options){ {} }
+    let(:all_paragraphs){ all_paragraphs_in source }
 
     describe ":begin" do
       it "drops all the text before the first match of the given expression" do
         options.merge! begin: /Third/
-        expect(source.text.size).to eq(1)
-        expect(source.text[0]).to match(/Third/)
+        expect(all_paragraphs.size).to eq(1)
+        expect(all_paragraphs[0]).to match(/Third/)
       end
 
       it "raises exception when no matching line was found" do
         options.merge! begin: /Not included/
-        expect{ source.text }.to raise_exception(ArgumentError)
+        expect{ all_paragraphs }.to raise_exception(ArgumentError)
       end
 
       it "loads whole text when option is nil" do
-        expect(source.text[0]).to match(/First/)
+        expect(all_paragraphs[0]).to match(/First/)
       end
     end
 
     describe ":end" do
       it "drops all the text from the first match till document end, including match" do
         options.merge! end: /is in a new paragraph/
-        expect(source.text.size).to eq(2)
-        expect(source.text[-1]).to match(/Third/)
-        expect(source.text[-1]).not_to match(/is in a new paragraph/)
-        expect(source.text[-1]).not_to match(/And consists of/)
+        expect(all_paragraphs.size).to eq(2)
+        expect(all_paragraphs[-1]).to match(/Third/)
+        expect(all_paragraphs[-1]).not_to match(/is in a new paragraph/)
+        expect(all_paragraphs[-1]).not_to match(/And consists of/)
       end
 
       it "raises exception when no matching line was found" do
         options.merge! end: /Not included/
-        expect{ source.text }.to raise_exception(ArgumentError)
+        expect{ all_paragraphs }.to raise_exception(ArgumentError)
       end
 
       it "loads whole text when option is nil" do
-        expect(source.text[0]).to match(/First/)
-        expect(source.text[-1]).to match(/Third/)
+        expect(all_paragraphs[0]).to match(/First/)
+        expect(all_paragraphs[-1]).to match(/Third/)
       end
     end
 
     describe ":min_words" do
       it "rejects paragraphs which have less than given words" do
         options.merge! min_words: 5
-        expect(source.text.size).to eq(1)
-        expect(source.text[0]).to match(/Third line/)
+        expect(all_paragraphs.size).to eq(1)
+        expect(all_paragraphs[0]).to match(/Third line/)
       end
 
       it "includes paragraphs which have at least given number of words" do
         options.merge! min_words: 4
-        expect(source.text.size).to eq(2)
-        expect(source.text[0]).to match(/First line/)
+        expect(all_paragraphs.size).to eq(2)
+        expect(all_paragraphs[0]).to match(/First line/)
       end
     end
   end

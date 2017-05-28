@@ -29,12 +29,14 @@ describe WellReadFaker do
   describe "#add_source" do
     subject{ WellReadFaker.add_source :short, path }
     let(:path){ "spec/short_text.txt" }
+    let(:added_source){ WellReadFaker.sources[:short] }
+    let(:all_paragraphs){ all_paragraphs_in added_source }
 
     it "instantiates a new Source and adds it to sources" do
       expect{ subject }.to change{ WellReadFaker.sources.size }.by(1)
-      expect(WellReadFaker.sources[:short]).to be_a(WellReadFaker::Source)
-      expect(WellReadFaker.sources[:short].text).not_to be_empty
-      expect(WellReadFaker.sources[:short].text.join).to match /First line/
+      expect(added_source).to be_a(WellReadFaker::Source)
+      expect(all_paragraphs).not_to be_empty
+      expect(all_paragraphs.join).to match /First line/
     end
   end
 
@@ -44,7 +46,7 @@ describe WellReadFaker do
     end
 
     it "does include load Gutenberg Project clutter, e.g. license" do
-      book_content = WellReadFaker.default_source.text.join
+      book_content = all_paragraphs_in(WellReadFaker.default_source).join
       expect(book_content).not_to match(/Project Gutenberg/i)
     end
 
