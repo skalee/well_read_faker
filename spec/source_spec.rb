@@ -73,11 +73,19 @@ describe WellReadFaker::Source do
       m.call
     end
 
+    retvals = []
+
     threads = Array.new(2) do
       Thread.new{ source.text }
     end
 
+    threads << Array.new(2) do
+      Thread.new{ retvals << source.paragraph }
+    end
+
     threads.each &:join
+
+    expect(retvals.uniq.size).to eq(2)
   end
 
   context "when initialized with option" do

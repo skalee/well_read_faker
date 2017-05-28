@@ -19,7 +19,7 @@ module WellReadFaker
 
     def paragraph
       ensure_loaded
-      @paragraph_iter.next
+      @paragraphs_arr[inc_paragraphs]
     end
 
     def ensure_loaded
@@ -46,7 +46,8 @@ module WellReadFaker
       if options[:min_words]
         paragraphs.select!{ |m| /(\w+\b\W*){#{options[:min_words]}}/ =~ m }
       end
-      @paragraph_iter = paragraphs.sort_by{ rand }.cycle
+      @paragraphs_arr = paragraphs.sort_by{ rand }
+      @paragraphs_idx = -1
       @text = paragraphs
     end
 
@@ -71,6 +72,12 @@ module WellReadFaker
 
       retval.strip!
       retval
+    end
+
+    def inc_paragraphs
+      mu_synchronize do
+        return @paragraphs_idx = (@paragraphs_idx + 1) % @paragraphs_arr.size
+      end
     end
 
   end
