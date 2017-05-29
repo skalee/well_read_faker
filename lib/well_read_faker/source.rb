@@ -41,7 +41,8 @@ module WellReadFaker
       if options[:min_words]
         paragraphs.select!{ |m| /(\w+\b\W*){#{options[:min_words]}}/ =~ m }
       end
-      @paragraphs_arr = paragraphs.sort_by{ rand }
+      @paragraphs_arr = paragraphs
+      shuffle_array @paragraphs_arr
       @paragraphs_idx = -1
     end
 
@@ -72,6 +73,12 @@ module WellReadFaker
       mu_synchronize do
         return @paragraphs_idx = (@paragraphs_idx + 1) % @paragraphs_arr.size
       end
+    end
+
+    # Extracted to a separate method to make stubbing easy (sometimes we want
+    # to preserve natural order in specs)
+    def shuffle_array array
+      array.sort_by!{ rand }
     end
 
   end
