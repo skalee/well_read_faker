@@ -87,6 +87,8 @@ describe WellReadFaker::Source do
     let(:options){ {} }
     let(:all_paragraphs){ all_paragraphs_in source }
 
+    preserve_paragraphs_natural_order_in! :source
+
     describe ":begin" do
       it "drops all the text before the first match of the given expression" do
         options.merge! begin: /Third/

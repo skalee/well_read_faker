@@ -14,6 +14,10 @@ RSpec.shared_context "Global helpers" do
     source.ensure_loaded
     source.instance_variable_get "@paragraphs_arr"
   end
+
+  def self.preserve_paragraphs_natural_order_in! source_name
+    before{ allow(send source_name).to receive(:shuffle_array) }
+  end
 end
 
 RSpec.configure do |config|
