@@ -36,12 +36,13 @@ module WellReadFaker
 
     def process_raw_text raw
       trimmed = trim_text_by_regexps raw, options[:begin], options[:end]
-      paragraphs = trimmed.split(/\n\s*\n/)
-      paragraphs.map!{ |m| m.gsub /\s*\n\s*/, " " }
+
+      @paragraphs_arr = trimmed.split(/\n\s*\n/)
+      @paragraphs_arr.map!{ |m| m.gsub /\s*\n\s*/, " " }
       if options[:min_words]
-        paragraphs.select!{ |m| /(\w+\b\W*){#{options[:min_words]}}/ =~ m }
+        @paragraphs_arr.select!{ |m| /(\w+\b\W*){#{options[:min_words]}}/ =~ m }
       end
-      @paragraphs_arr = paragraphs
+
       shuffle_array @paragraphs_arr
       @paragraphs_idx = -1
     end
