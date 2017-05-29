@@ -12,7 +12,7 @@ require "well_read_faker"
 RSpec.shared_context "Global helpers" do
   def all_paragraphs_in source
     source.ensure_loaded
-    source.instance_variable_get "@text"
+    source.instance_variable_get "@paragraphs_arr"
   end
 end
 

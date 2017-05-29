@@ -43,7 +43,6 @@ module WellReadFaker
       end
       @paragraphs_arr = paragraphs.sort_by{ rand }
       @paragraphs_idx = -1
-      @text = paragraphs
     end
 
     def trim_text_by_regexps source_text, begin_rx, end_rx
