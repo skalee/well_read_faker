@@ -39,6 +39,7 @@ module WellReadFaker
 
       @paragraphs_arr = trimmed.split(/\n\s*\n/)
       @paragraphs_arr.map!{ |m| m.gsub /\s*\n\s*/, " " }
+      @paragraphs_arr.uniq!
       if options[:min_words]
         @paragraphs_arr.select!{ |m| /(\w+\b\W*){#{options[:min_words]}}/ =~ m }
       end

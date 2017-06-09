@@ -48,6 +48,12 @@ describe WellReadFaker::Source do
       end
     end
 
+    it "rejects paragraph duplicates from the source text" do
+      path.replace "spec/text_with_duplicates.txt"
+      expect(take_many[0]).to eq(take_many[2]) & eq(take_many[4])
+      expect(take_many[1]).to eq(take_many[3]) & eq(take_many[5])
+    end
+
     describe "every possible return value" do
       subject{ take_many.to_set }
 
