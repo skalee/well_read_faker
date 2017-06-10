@@ -59,9 +59,16 @@ In the source text, paragraphs must be separated with blank lines.
 
 == Note about randomness quality
 
-There is no guarantee that subsequent calls always return unique values.
-Currently, results are drawn with +Array#sample+.  The Iliad consists of
-over 1000 paragraphs, and that should be enough for many applications.
+For given text source, the paragraphs are returned in a random order, but will
+not be repeated (in the sense of +String#==+ equality) until all unique
+paragraphs from that text are returned exactly once.  After that, they are
+returned once again in the same order.
+
+Therefore it is guaranteed that if given source text contains +n+ unique
+paragraphs, then +n+ subsequent calls of +#paragraph+ method will return
+unique values.
+
+For your information, The Iliad contains over 1000 unique paragraphs.
 
 == License
 
