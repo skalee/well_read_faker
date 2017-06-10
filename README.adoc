@@ -33,6 +33,30 @@ dare not with my own eyes witness this fight between my son and
 Menelaus, for Jove and the other immortals alone know which shall fall."
 --------------------------------------------------------------------------------
 
+== Custom sources
+
+Well Read Faker comes with "Iliad" bundled as a default source.  However,
+custom sources can be used:
+
+[source,ruby]
+--------------------------------------------------------------------------------
+WellReadFaker.add_source :book_in_my_language, "path/to/book", {}
+WellReadFaker[:book_in_my_language].paragraph
+WellReadFaker.default_source = :book_in_my_language
+WellReadFaker.paragraph
+WellReadFaker[:iliad].paragraph # Iliad can be still accessed
+--------------------------------------------------------------------------------
+
+The second argument passed to +WellReadFaker::add_source+ can be a string
+containing a file path, or any object which responds to +#read+, like +File+
+instance.
+
+The third argument is optional but can be used to supply additional options,
+for example to skip book descriptor or legal notes.  See
++lib/well_read_faker/load_bundled_sources.rb+ for examples.
+
+In the source text, paragraphs must be separated with blank lines.
+
 == Note about randomness quality
 
 There is no guarantee that subsequent calls always return unique values.
