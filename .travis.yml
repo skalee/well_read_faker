@@ -1,7 +1,10 @@
 dist: trusty
 sudo: false
 language: ruby
-before_install: gem install bundler -v 1.14.6
+
+before_install:
+  - gem install bundler -v "< 2" # Bundler 2.x does not work with older Rubies
+
 rvm:
   - "2.6.1"
   - "2.5.3"
