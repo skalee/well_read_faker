@@ -4,13 +4,13 @@ Well Read Faker
 
 ifdef::env-github[]
 image:https://img.shields.io/gem/v/well_read_faker.svg[
-Version, link="https://rubygems.org/gems/well_read_faker"]
+	Version, link="https://rubygems.org/gems/well_read_faker"]
 image:https://img.shields.io/travis/skalee/well_read_faker/master.svg[
-Build Status, link="https://travis-ci.org/skalee/well_read_faker/branches"]
+	Build Status, link="https://travis-ci.org/skalee/well_read_faker/branches"]
 image:https://img.shields.io/codeclimate/github/skalee/well_read_faker.svg[
-Code Climate, link="https://codeclimate.com/github/skalee/well_read_faker"]
+	Code Climate, link="https://codeclimate.com/github/skalee/well_read_faker"]
 image:http://img.shields.io/coveralls/skalee/well_read_faker.svg[
-Test Coverage, link="https://coveralls.io/r/skalee/well_read_faker"]
+	Test Coverage, link="https://coveralls.io/r/skalee/well_read_faker"]
 ifdef::env-github[]
 
 :toc:
