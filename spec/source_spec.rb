@@ -1,5 +1,7 @@
 require "spec_helper"
 
+require "set"
+
 describe WellReadFaker::Source do
 
   let(:source){ described_class.new path }
