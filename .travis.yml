@@ -5,6 +5,7 @@ before_install:
   - gem install bundler -v "< 2" # Bundler 2.x does not work with older Rubies
 
 rvm:
+  - "3.0"
   - "2.7"
   - "2.6"
   - "2.5"
