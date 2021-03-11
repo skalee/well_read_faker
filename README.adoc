@@ -5,8 +5,8 @@ Well Read Faker
 ifdef::env-github[]
 image:https://img.shields.io/gem/v/well_read_faker[
 	Version, link="https://rubygems.org/gems/well_read_faker"]
-image:https://img.shields.io/travis/skalee/well_read_faker/master[
-	Build Status, link="https://travis-ci.org/skalee/well_read_faker/branches"]
+image:https://img.shields.io/travis/com/skalee/well_read_faker/master[
+	Build Status, link="https://travis-ci.com/skalee/well_read_faker/branches"]
 image:https://img.shields.io/codeclimate/maintainability/skalee/well_read_faker[
 	Code Climate, link="https://codeclimate.com/github/skalee/well_read_faker"]
 image:http://img.shields.io/coveralls/skalee/well_read_faker[
