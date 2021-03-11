@@ -2,7 +2,8 @@ dist: xenial
 language: ruby
 
 before_install:
-  - gem install bundler -v "< 2" # Bundler 2.x does not work with older Rubies
+  # Bundler 2.x does not work with older Rubies
+  - bundle -v || gem install bundler -v "< 2"
 
 rvm:
   - "3.0"
